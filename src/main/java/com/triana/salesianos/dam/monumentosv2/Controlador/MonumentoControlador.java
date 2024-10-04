@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/monumentos")
+@RequestMapping("/monumento")
 @RequiredArgsConstructor
 public class MonumentoControlador {
 
@@ -27,7 +27,7 @@ public class MonumentoControlador {
     }
 
     //mostrar un monumento por id
-    @GetMapping("/monumento/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity mostrarMonumento(Model model, @PathVariable Long id) {
         Monumento monumento = monumentoServicio.findById(id);
         return monumento != null ? new ResponseEntity<>(monumento, HttpStatus.OK)
@@ -35,7 +35,7 @@ public class MonumentoControlador {
     }
 
     //añadir un monumento
-    @PostMapping("/nuevoMonumento")
+    @PostMapping("/")
     public ResponseEntity<Monumento> crearMonumento(@RequestBody Monumento monumento) {
         monumento = monumentoServicio.save(monumento);
         return new ResponseEntity<>(monumento, HttpStatus.CREATED);
@@ -43,7 +43,7 @@ public class MonumentoControlador {
 
 
     //editar un monumento
-    @PutMapping("/editarMonumento/{id}")
+    @PutMapping("/{id}")
         public ResponseEntity<Monumento> editMonumento(@PathVariable long id, @RequestBody Monumento monumento) {
         return ResponseEntity.ok(monumentoServicio.edit(monumento, id));
     }
